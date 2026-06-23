@@ -5,6 +5,8 @@ import FilterBar from './components/FilterBar';
 import GoatCard from './components/GoatCard';
 import GoatDetailModal from './components/GoatDetailModal';
 import Calculator from './components/Calculator';
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
 import { goatsData } from './data/goats';
 
 export default function App() {
@@ -116,8 +118,14 @@ export default function App() {
       {/* Estimator Calculator */}
       <Calculator />
 
+      {/* Testimonials Section - Enhanced */}
+      <Testimonials />
+
+      {/* FAQ Section - Enhanced */}
+      <FAQ />
+
       {/* Why Choose Us Section */}
-      <section id="testimoni" className="why-choose-us">
+      <section id="testimoni" className="why-choose-us reveal">
         <div className="section-header text-center">
           <div className="badge">⭐ Keunggulan Kami</div>
           <h2>Mengapa Belanja di KambingHub?</h2>
