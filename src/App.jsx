@@ -7,6 +7,7 @@ import GoatDetailModal from './components/GoatDetailModal';
 import Calculator from './components/Calculator';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
+import LocationMap from './components/LocationMap';
 import { goatsData } from './data/goats';
 
 export default function App() {
@@ -123,6 +124,9 @@ export default function App() {
 
       {/* FAQ Section - Enhanced */}
       <FAQ />
+
+      {/* Location Map Section */}
+      <LocationMap />
 
       {/* Why Choose Us Section */}
       <section id="testimoni" className="why-choose-us reveal">
