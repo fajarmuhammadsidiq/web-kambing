@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import FilterBar from './components/FilterBar';
@@ -11,6 +11,45 @@ import LocationMap from './components/LocationMap';
 import { goatsData } from './data/goats';
 
 export default function App() {
+  // Scroll-reveal effect listener
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    const hiddenElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    hiddenElements.forEach(el => observer.observe(el));
+
+    // Fallback: in case IntersectionObserver fails or elements are already visible
+    const handleScrollFallback = () => {
+      hiddenElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          el.classList.add('active');
+        }
+      });
+    };
+
+    // Run once at start
+    handleScrollFallback();
+    window.addEventListener('scroll', handleScrollFallback);
+
+    return () => {
+      hiddenElements.forEach(el => observer.unobserve(el));
+      window.removeEventListener('scroll', handleScrollFallback);
+    };
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBreed, setSelectedBreed] = useState('Semua');
   const [sortBy, setSortBy] = useState('default');

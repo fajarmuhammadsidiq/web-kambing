@@ -5,8 +5,8 @@ export default function LocationMap() {
   const latitude = -6.382435308769669;
   const longitude = 106.84989153623714;
   
-  // URL embed OpenStreetMap
-  const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${longitude - 0.01},${latitude - 0.01},${longitude + 0.01},${latitude + 0.01}&layer=mapnik&marker=${latitude},${longitude}`;
+  // URL Google Maps Embed (Gratis, tanpa API Key, sangat kompatibel di semua browser)
+  const mapUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
     <section id="lokasi" className="location-section reveal">
@@ -18,7 +18,7 @@ export default function LocationMap() {
         </p>
       </div>
 
-      <div className="map-container">
+      <div className="map-container" style={{ position: 'relative', overflow: 'hidden', minHeight: '450px', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)' }}>
         <iframe
           width="100%"
           height="450"
@@ -27,8 +27,8 @@ export default function LocationMap() {
           marginHeight="0"
           marginWidth="0"
           src={mapUrl}
-          title="Lokasi KambingHub"
-          className="osm-map"
+          title="Lokasi KambingHub Google Maps"
+          style={{ border: 0, display: 'block' }}
         ></iframe>
       </div>
 
@@ -59,15 +59,7 @@ export default function LocationMap() {
           rel="noopener noreferrer"
           className="btn btn-primary"
         >
-          🗺️ Buka di Google Maps
-        </a>
-        <a 
-          href={`https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=16/${latitude}/${longitude}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-secondary"
-        >
-          📍 Lihat di OpenStreetMap
+          🗺️ Buka di Google Maps Utama
         </a>
       </div>
     </section>
