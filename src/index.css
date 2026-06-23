@@ -720,7 +720,6 @@ a {
 .goat-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
-  animation: glowPulse 2s ease-in-out infinite;
 }
 
 .card-image-wrapper {
