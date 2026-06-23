@@ -42,13 +42,17 @@ const testimonials = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const itemsPerView = 3; // Desktop default
 
   // Auto slide every 5 seconds
   useEffect(() => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setCurrentIndex((prev) => {
+        const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+        return (prev + 1) > maxIndex ? 0 : prev + 1;
+      });
     }, 5000);
 
     return () => clearInterval(interval);
@@ -61,13 +65,19 @@ export default function Testimonials() {
   };
 
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex((prev) => {
+      const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+      return prev === 0 ? maxIndex : prev - 1;
+    });
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setCurrentIndex((prev) => {
+      const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+      return (prev + 1) > maxIndex ? 0 : prev + 1;
+    });
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 10000);
   };
@@ -99,7 +109,7 @@ export default function Testimonials() {
         </button>
 
         {/* Testimonials Cards */}
-        <div className="testimonials-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        <div className="testimonials-track" style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}>
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="testimonial-card">
               <div className="testimonial-header">
